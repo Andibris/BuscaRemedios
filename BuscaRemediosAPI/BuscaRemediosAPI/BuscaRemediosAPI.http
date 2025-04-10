@@ -1,0 +1,6 @@
+@BuscaRemediosAPI_HostAddress = http://localhost:5201
+
+GET {{BuscaRemediosAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,11 @@
+# Node (React)
+node_modules/
+dist/
+.env
+
+# .NET
+bin/
+obj/
+*.user
+*.vs
+*.suo
