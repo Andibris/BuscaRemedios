@@ -49,17 +49,28 @@ namespace MedicamentoAPI.Controllers
                 httpClient.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.0.0 Safari/537.36");
 
                 // Faz a requisição HTTP para obter o conteúdo da página
-                var response = await httpClient.GetStringAsync(url);
+                var response = await httpClient.GetAsync(url);
 
-                // Verifica se a resposta da requisição está vazia ou nula
-                if (string.IsNullOrWhiteSpace(response))
+                if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    return NotFound("Nenhum medicamento encontrado.");
+                }
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    return StatusCode((int)response.StatusCode, "Erro ao acessar o site de medicamentos.");
+                }
+
+                var html = await response.Content.ReadAsStringAsync();
+
+                if (string.IsNullOrWhiteSpace(html))
                 {
                     return NotFound("Nenhum medicamento encontrado.");
                 }
 
                 // Carrega o conteúdo HTML com o HtmlAgilityPack
                 var doc = new HtmlDocument();
-                doc.LoadHtml(response);
+                doc.LoadHtml(html);
 
                 // Inicializa a lista de medicamentos
                 var medicamentos = new List<Medicamento>();
