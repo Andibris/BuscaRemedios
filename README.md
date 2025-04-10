@@ -1,7 +1,7 @@
 # 💊 BuscaRemedios
 Este é um projeto completo com API em .NET 8.0 e front-end em React, desenvolvido para facilitar a busca de medicamentos com filtros por nome, preço mínimo e preço máximo.
 
-##🔍 Funcionalidades
+## 🔍 Funcionalidades
 Busca de medicamentos por nome, princípio ativo ou fornecedor
 Filtros de preço mínimo e máximo
 Resultados com nome, preço, fornecedor, princípio ativo e link para mais informações
